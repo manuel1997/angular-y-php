@@ -3,7 +3,7 @@
 function retornarConexion() {
     $link = 'mysql:host=localhost;dbname=bd1';
     $usuario = 'root';
-    $password = '123456';
+    $password = 'admin';
 
     try {
         $pdo= new PDO($link, $usuario, $password);

@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { ArticulosService } from './articulos.service';
 import {HttpClientModule} from '@angular/common/http';
 
+import { MaterializeModule } from 'angular2-materialize';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +18,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterializeModule
   ],
   providers: [ArticulosService],
   bootstrap: [AppComponent]

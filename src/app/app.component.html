@@ -1,43 +1,64 @@
 <div class="container">
   <h1>Tabla de registros</h1>
+  
+<!--  <a class="btn" (click)="miToast()">Toast!</a> -->
+  
   <div class="card content">
     <div class="card-panel purple darken-3">
       <strong style="color: white">Administración de artículos</strong>
     </div>
-    <table class="centered" border="1" *ngIf="hayRegistros(); else sinarticulos">
-      <tr>
-        <th>Codigo</th>
-        <th>Descripcion</th>
-        <th>Precio</th>
-        <th>Borrar</th>
-        <th>Seleccionar</th>
-      </tr>
-      <tr *ngFor="let art of articulos">
-        <td>{{art.codigo}}</td>
-        <td>{{art.descripcion}}</td>
-        <td>{{art.precio}}</td>
-        <td><button class="waves-effect red accent-4 btn" (click)="baja(art.codigo)">Borrar?</button></td>
-        <td><button class="waves-effect purple darken-4 btn" (click)="seleccionar(art.codigo)">Seleccionar</button></td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class=" row col s6">
+        <div class="row">
+          <div class="input-field col s9">
+            <input placeholder="" [(ngModel)]="art.descripcion" type="text" class="validate">
+            <label for="first_name" class="active">Descripcion</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s9">
+            <input placeholder="" [(ngModel)]="art.precio" type="number" class="validate">
+            <label for="precio" class="active">Precio</label>
+          </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s9">
+          <button class="waves-effect red darken-2 btn" (click)="alta()">Agregar</button>
+          <button class="waves-effect blue darken-1 btn" (click)="modificacion()">Modificar</button>
+        </div>
+        </div>
+      </div>
+      <div class="col s6">
+        <table class="centered" border="1" *ngIf="hayRegistros(); else sinarticulos">
+          <tr>
+            <th>Codigo</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Borrar</th>
+            <th>Editar</th>
+          </tr>
+          <tr *ngFor="let art of articulos">
+            <td>{{art.codigo}}</td>
+            <td>{{art.descripcion}}</td>
+            <td>{{art.precio}}</td>
+            <td><button class="waves-effect red accent-4 btn" (click)="baja(art.codigo)">Borrar?</button></td>
+            <td><button class="waves-effect purple darken-4 btn" (click)="seleccionar(art.codigo)">editar</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
+
+
+
 <ng-template #sinarticulos>
   <p>No hay articulos.</p>
 </ng-template>
-<div class="container">
-  <div class="row">
-    <div class="input-field col s4">
-      <input placeholder="" [(ngModel)]="art.descripcion" type="text" class="validate">
-      <label for="first_name" class="active">Descripcion</label>
-    </div>
-    <div class="input-field col s4">
-      <input placeholder="" [(ngModel)]="art.precio" type="text" class="validate">
-      <label for="precio" class="active">Precio</label>
-    </div>
-  </div>
-  <div class="row">
-    <button class="waves-effect red darken-2 btn" (click)="alta()">Agregar</button>
-    <button class="waves-effect blue darken-1 btn" (click)="modificacion()">Modificar</button>
-  </div>
-</div>
+
+
+
+<script>
+  alert("Hello! I am an alert box!");
+
+</script>

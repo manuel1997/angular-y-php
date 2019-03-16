@@ -9,14 +9,24 @@
   $codigo = $_GET['codigo'];
 
   $params=$pdo->prepare("DELETE FROM articulos WHERE codigo = ?");
-  $params->execute(array($codigo));
+  
+
+  if ($params->execute(array($codigo))) {
+
+    $vari = 1;
+    
+  }else{
+
+    $vari = 2;
+  }
  
   
   class Result {}
 
   $response = new Result();
-  $response->resultado = 'OK';
+  $response->resultado = $vari;
   $response->mensaje = 'articulo borrado';
+  $response->msj = 'fallo';
 
   header('Content-Type: application/json');
   echo json_encode($response);  

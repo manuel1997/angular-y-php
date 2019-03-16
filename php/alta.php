@@ -13,14 +13,21 @@
   $precio = $_POST['precio'];
 
   $params=$pdo->prepare("INSERT INTO articulos (descripcion, precio) VALUES(?,?)");
-  $params->execute(array($descripcion,$precio));
+
+
+  if ($params->execute(array($descripcion,$precio))) {
+    $vari = 1;
+  }else{
+    $vari = 2;
+  }
 
   
   class Result {}
 
   $response = new Result();
-  $response->resultado = 'OK';
-  $response->mensaje = 'datos grabados';
+  $response->resultado = $vari;
+  $response->mensaje = 'datos agregados';
+  $response->msj = 'error al agregar';
 
   header('Content-Type: application/json');
   echo json_encode($response);  
