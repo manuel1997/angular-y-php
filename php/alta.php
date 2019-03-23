@@ -9,8 +9,8 @@
   require("conexion.php");
   $pdo=retornarConexion();
 
-  $descripcion = $_POST['descripcion'];
-  $precio = $_POST['precio'];
+  $descripcion = $_POST['descripcione'];
+  $precio = $_POST['precioe'];
 
   $params=$pdo->prepare("INSERT INTO articulos (descripcion, precio) VALUES(?,?)");
 

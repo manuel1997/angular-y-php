@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component,  ViewChild, ElementRef} from '@angular/core';
 import { ArticulosService } from './articulos.service';
 import { HttpClient } from '@angular/common/http';
+import {NgForm} from '@angular/forms'; 
 
 import { toast } from 'angular2-materialize';
+
+
+declare var $: any;
+
 
 @Component({
   selector: 'app-root',
@@ -11,15 +16,28 @@ import { toast } from 'angular2-materialize';
 })
 
 export class AppComponent {
+   
+  onSubmit(f: NgForm) {  
+    f.resetForm(); 
+   } 
+
+  @ViewChild('focus') private elementRef: ElementRef;
+
+  public ngAfterViewInit(): void {
+    this.elementRef.nativeElement.focus();
+  }
 
   articulos=null;
   
   art={
     codigo:null,
     descripcion:null,
-    precio:null
+    precio:null,
+    descripcione:null,
+    precioe:null
 
   }
+
 
   constructor(private articulosServicio: ArticulosService) {}
 
@@ -27,6 +45,11 @@ export class AppComponent {
     this.recuperarTodos();
   }
 
+
+  muestra(){
+    $('#modal1').modal();
+   }
+ 
   miToast() {
     toast("¡FUNCIONA WEY!", 4000,'green');
 }
@@ -37,11 +60,12 @@ export class AppComponent {
 
   alta() {
     this.articulosServicio.alta(this.art).subscribe(datos => {
+      this.elementRef.nativeElement.focus();
       if (datos['resultado']=='1') {
-        toast("¡DATOS AGREGADOS!", 4000,'green');
+        toast("¡DATOS AGREGADOS!", 3000,'green');
         this.recuperarTodos();
       }else if (datos['resultado']=='2') {
-        toast("¡error al agregar!", 4000,'red');
+        toast("¡Error al agregar!", 3000,'red');
         this.recuperarTodos();
       }
     });
@@ -49,8 +73,9 @@ export class AppComponent {
 
   baja(codigo) {
     this.articulosServicio.baja(codigo).subscribe(datos => {
+      this.elementRef.nativeElement.focus();
       if (datos['resultado']=='1') {
-        alert(datos['mensaje']);
+        toast("¡Producto Eliminado!", 3000,'red');
         this.recuperarTodos();
       }else if (datos['resultado']=='2') {
         alert(datos['msj']);
@@ -62,7 +87,7 @@ export class AppComponent {
   modificacion() {
     this.articulosServicio.modificacion(this.art).subscribe(datos => {
       if (datos['resultado']=='OK') {
-        alert(datos['mensaje']);
+        toast("¡Producto Modificado!", 3000,'waves-effect blue darken-1');
         this.recuperarTodos();
       }
     });    
